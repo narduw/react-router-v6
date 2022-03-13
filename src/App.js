@@ -1,25 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import useAuth from './useAuth'
+import AuthenticatedRoutes from './AuthenticatedRoutes'
+import PublicRoutes from './PublicRoutes'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { user } = useAuth()
+  const AppRoutes = user ? AuthenticatedRoutes : PublicRoutes
+  return <div className='flex flex-col text-center'>
+    <AppRoutes />
+  </div>
 }
 
 export default App;
