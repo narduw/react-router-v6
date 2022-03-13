@@ -2,13 +2,17 @@ import { createContext, useState } from 'react'
 
 export const ROLES = {
 	ADMIN: 'admin',
-	USER: 'user'
+	AUDITOR: 'auditor'
 }
 
 const dummyUser = {
-	name: 'user',
-	roles: ['admin']
+	name: 'auditor',
+	roles: [ROLES.AUDITOR]
 }
+
+const isRole = role => user => user?.roles?.includes(role)
+const isAdmin = isRole(ROLES.ADMIN)
+const isAuditor = isRole(ROLES.AUDITOR)
 
 export const AuthContext = createContext(null)
 
@@ -31,6 +35,8 @@ export function AuthProvider({ children }) {
 
 	const authContext = {
 		user,
+		isAdmin: isAdmin(user),
+		isAuditor: isAuditor(user),
 		login,
 		logout
 	}
