@@ -1,13 +1,21 @@
 import { createContext, useState } from 'react'
 
+export const ROLES = {
+	ADMIN: 'admin',
+	USER: 'user'
+}
+
 const dummyUser = {
-	name: 'user'
+	name: 'user',
+	roles: ['admin']
 }
 
 export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-	const [user, setUser] = useState(null)
+	const storedData = localStorage.getItem('user')
+	const storedUser = storedData && JSON.parse(storedData)
+	const [user, setUser] = useState(storedUser)
 
 	function login() {
 		setUser(dummyUser)
