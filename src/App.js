@@ -1,5 +1,5 @@
-import AppRoutes from './AppRoutes'
-import Navigation from './Navigation'
+import AppRoutes from './routes/AppRoutes'
+import Navigation from './components/Navigation'
 
 function App() {
   return <div className='flex flex-col items-center text-center mx-auto'>

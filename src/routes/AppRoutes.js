@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import useAuth from './useAuth'
-import Login from './Login'
-import Home from './Home'
-import Faq from './Faq'
-import UserManagement from './UserManagement'
-import FileManagement from './FileManagement'
+import useAuth from '../hooks/useAuth'
+import Login from '../components/Login'
+import Home from '../components/Home'
+import Faq from '../components/Faq'
+import UserManagement from '../components/UserManagement'
+import FileManagement from '../components/FileManagement'
 
 export default function AppRoutes() {
 	const { user } = useAuth()
