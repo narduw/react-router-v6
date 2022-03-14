@@ -5,14 +5,15 @@ export const ROLES = {
 	AUDITOR: 'auditor'
 }
 
-const dummyUser = {
-	name: 'auditor',
-	roles: [ROLES.AUDITOR]
+const defaultRoles = {
+	admin: false,
+	auditor: false
 }
 
-const isRole = role => user => user?.roles?.includes(role)
-const isAdmin = isRole(ROLES.ADMIN)
-const isAuditor = isRole(ROLES.AUDITOR)
+const dummyUser = {
+	name: 'auditor',
+	role: defaultRoles
+}
 
 export const AuthContext = createContext(null)
 
@@ -21,8 +22,11 @@ export function AuthProvider({ children }) {
 	const storedUser = storedData && JSON.parse(storedData)
 	const [user, setUser] = useState(storedUser)
 
-	function login() {
-		setUser(dummyUser)
+	function login(roles) {
+		setUser({
+			...dummyUser,
+			roles
+		})
 		localStorage.setItem('user', JSON.stringify(dummyUser))
 		return user
 	}
@@ -35,8 +39,7 @@ export function AuthProvider({ children }) {
 
 	const authContext = {
 		user,
-		isAdmin: isAdmin(user),
-		isAuditor: isAuditor(user),
+		roles: user?.roles || defaultRoles,
 		login,
 		logout
 	}
